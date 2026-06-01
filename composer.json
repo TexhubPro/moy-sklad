@@ -1,0 +1,60 @@
+{
+    "name": "texhub/moy-sklad",
+    "description": "Full-featured MoySklad (МойСклад) JSON API 1.2 SDK for any PHP framework with first-class Laravel & multi-tenant support: products, stock, images, counterparties, orders, reports and webhooks.",
+    "type": "library",
+    "keywords": ["php", "laravel", "moysklad", "moy-sklad", "inventory", "warehouse", "erp", "webhooks", "multi-tenant", "texhub"],
+    "homepage": "https://texhub.pro",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mahmudi Shodmehr",
+            "email": "info@texhub.pro",
+            "homepage": "https://texhub.pro",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "issues": "https://texhub.pro",
+        "docs": "https://dev.moysklad.ru/doc/api/remap/1.2/"
+    },
+    "require": {
+        "php": "^8.2",
+        "ext-curl": "*",
+        "ext-json": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^11.0 || ^12.0",
+        "illuminate/support": "^11.0 || ^12.0 || ^13.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "TexHub\\MoySklad\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "TexHub\\MoySklad\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "TexHub\\MoySklad\\Laravel\\MoySkladServiceProvider"
+            ],
+            "aliases": {
+                "MoySklad": "TexHub\\MoySklad\\Laravel\\MoySklad"
+            }
+        }
+    },
+    "suggest": {
+        "illuminate/support": "Required to use the package inside a Laravel application (service provider, facade, config publishing)."
+    },
+    "scripts": {
+        "test": "phpunit"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
