@@ -61,6 +61,26 @@ final class ProductsClient extends EntityClient
     }
 
     /**
+     * Download the raw bytes of an image by its download href
+     * (from an image row's `meta.downloadHref`, `miniature.href` or `tiny.href`).
+     */
+    public function downloadImage(string $downloadHref): string
+    {
+        return $this->http->getRaw($downloadHref)->body;
+    }
+
+    /**
+     * Convenience: download the first image of a product as raw bytes (or null).
+     */
+    public function firstImageContents(string $productId): ?string
+    {
+        $rows = $this->images($productId)->rows();
+        $href = $rows[0]['meta']['downloadHref'] ?? null;
+
+        return $href === null ? null : $this->downloadImage((string) $href);
+    }
+
+    /**
      * Get a product's sale prices (convenience).
      *
      * @return array<int, array<string, mixed>>

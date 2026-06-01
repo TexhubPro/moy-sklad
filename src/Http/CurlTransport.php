@@ -29,6 +29,7 @@ final class CurlTransport implements Transport
             CURLOPT_CUSTOMREQUEST => strtoupper($method),
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => 'gzip',
+            CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_TIMEOUT => $this->timeout,
             CURLOPT_CONNECTTIMEOUT => $this->timeout,
             CURLOPT_USERAGENT => $this->userAgent,

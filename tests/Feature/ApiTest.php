@@ -69,6 +69,22 @@ final class ApiTest extends TestCase
         $this->assertSame(base64_encode('BINARY'), $req['json'][0]['content']);
     }
 
+    public function test_list_and_download_product_image(): void
+    {
+        $t = new FakeTransport();
+        $t->push(['rows' => [[
+            'id' => 'img1',
+            'meta' => ['downloadHref' => 'https://api.moysklad.ru/api/remap/1.2/download/abc'],
+        ]], 'meta' => ['size' => 1]])
+          ->pushRaw('JPEGBYTES');
+
+        $bytes = $this->ms($t)->products()->firstImageContents('p1');
+
+        $this->assertSame('JPEGBYTES', $bytes);
+        $this->assertStringContainsString('/entity/product/p1/images', $t->history[0]['url']);
+        $this->assertSame('https://api.moysklad.ru/api/remap/1.2/download/abc', $t->history[1]['url']);
+    }
+
     public function test_stock_report(): void
     {
         $t = (new FakeTransport())->push(['rows' => [['stock' => 5]], 'meta' => ['size' => 1]]);

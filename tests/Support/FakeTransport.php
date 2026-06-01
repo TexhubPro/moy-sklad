@@ -34,6 +34,13 @@ final class FakeTransport implements Transport
         return $this;
     }
 
+    public function pushRaw(string $body, int $status = 200): self
+    {
+        $this->queue[] = new RawResponse($status, $body);
+
+        return $this;
+    }
+
     public function request(string $method, string $url, array $headers = [], ?array $json = null): RawResponse
     {
         $this->history[] = compact('method', 'url', 'headers', 'json');

@@ -64,6 +64,23 @@ final class HttpClient
     }
 
     /**
+     * GET returning the raw response (for binary downloads such as image files).
+     * Accepts an absolute URL or a path. Throws on HTTP error.
+     */
+    public function getRaw(string $urlOrPath): RawResponse
+    {
+        $url = str_starts_with($urlOrPath, 'http') ? $urlOrPath : $this->config->url($urlOrPath);
+
+        $response = $this->transport->request('GET', $url, $this->headers());
+
+        if (! $response->isSuccessful()) {
+            $this->decode($response);
+        }
+
+        return $response;
+    }
+
+    /**
      * Build a MoySklad query string. Array values for `filter` are joined with
      * `;` (e.g. ['filter' => ['archived=false', 'name=Acme']]).
      *
