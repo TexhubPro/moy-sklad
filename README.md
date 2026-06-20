@@ -1,6 +1,6 @@
 # TexHub · MoySklad
 
-**🌐 English** · [Русский](README.ru.md)
+**English** · [Русский](README.ru.md)
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![PHP](https://img.shields.io/badge/php-%5E8.2-777bb4.svg)](composer.json)
@@ -12,20 +12,20 @@ Reference: <https://dev.moysklad.ru/doc/api/remap/1.2/>
 
 ---
 
-## ✨ Features
+## Features
 
-- 📦 **Products** — full CRUD with name, code, article, description, prices, attributes
-- 🖼 **Images** — list, upload (file/base64), delete
-- 📊 **Stock** — `report/stock/all`, by store, short stock, assortment
-- 🧩 **Generic entity client** — reach *any* entity (`counterparty`, `customerorder`, `demand`, …)
-- 🔔 **Webhooks** — manage subscriptions + parse incoming events (with `accountId` for tenant routing)
-- 🏢 **Multi-tenant** — one client per account via token; `forToken()` switching
-- 🔎 **Query builder** — pagination, filters, search, order, `expand`
-- 🔑 Token or login/password auth · gzip · typed responses · fully tested
+- **Products** — full CRUD with name, code, article, description, prices, attributes
+- **Images** — list, upload (file/base64), delete
+- **Stock** — `report/stock/all`, by store, short stock, assortment
+- **Generic entity client** — reach *any* entity (`counterparty`, `customerorder`, `demand`, …)
+- **Webhooks** — manage subscriptions + parse incoming events (with `accountId` for tenant routing)
+- **Multi-tenant** — one client per account via token; `forToken()` switching
+- **Query builder** — pagination, filters, search, order, `expand`
+- Token or login/password auth · gzip · typed responses · fully tested
 
 ---
 
-## 📦 Installation
+## Installation
 
 ```bash
 composer require texhub/moy-sklad
@@ -35,7 +35,7 @@ Requirements: **PHP ≥ 8.2** with `curl`, `json`.
 
 ---
 
-## 🚀 Quick start
+## Quick start
 
 ```php
 use TexHub\MoySklad\MoySklad;
@@ -63,7 +63,7 @@ $token = MoySklad::withLogin('login', 'password')->tokens()->create();
 
 ---
 
-## 📦 Products, descriptions & images
+## Products, descriptions & images
 
 ```php
 // Create with description and a sale price:
@@ -87,7 +87,7 @@ $ms->products()->deleteImage($product->id(), $imageId);
 
 ---
 
-## 📊 Stock (количество) & assortment
+## Stock (количество) & assortment
 
 ```php
 $ms->reports()->stockAll();                 // отчёт «Остатки» по всем товарам
@@ -99,7 +99,7 @@ Each stock row contains `stock`, `reserve`, `inTransit`, `quantity`, plus the li
 
 ---
 
-## 🧩 Any entity
+## Any entity
 
 ```php
 $ms->counterparties()->list();
@@ -112,7 +112,7 @@ Built-in helpers: `products()`, `variants()`, `services()`, `bundles()`, `produc
 
 ---
 
-## 🔔 Webhooks
+## Webhooks
 
 **Subscribe** (so MoySklad notifies your URL):
 
@@ -136,7 +136,7 @@ http_response_code(200);
 
 ---
 
-## 🏢 Multi-tenant / SaaS
+## Multi-tenant / SaaS
 
 Each customer connects their own MoySklad account. Store their token (or login/password → token) and build a per-tenant client:
 
@@ -154,7 +154,7 @@ $tenant = Tenant::where('ms_account_id', $accountId)->first();
 
 ---
 
-## ⚙️ Error handling
+## Error handling
 
 ```php
 use TexHub\MoySklad\Exceptions\ApiException;
@@ -171,7 +171,7 @@ try {
 
 ---
 
-## <a name="laravel"></a>🧩 Laravel
+## <a name="laravel"></a> Laravel
 
 Auto-discovered. Publish config:
 
@@ -201,7 +201,7 @@ MoySklad::forToken($tenant->ms_token)->reports()->stockAll();   // multi-tenant
 
 ---
 
-## 🧪 Testing
+## Testing
 
 ```php
 use TexHub\MoySklad\MoySklad;
@@ -219,7 +219,7 @@ composer install && composer test
 
 ---
 
-## 📚 Architecture
+## Architecture
 
 ```
 src/
